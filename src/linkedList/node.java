@@ -1,6 +1,7 @@
 package linkedList;
 
 import java.util.HashSet;
+import java.util.Stack;
 
 
 	
@@ -132,8 +133,9 @@ public node partitionAround(int val,node head){
 			}
 			else{
 				endbeforelist.next = n;
+				//System.out.println(	startbeforelist.next.value);
 				endbeforelist = n;
-				//System.out.println(n.value);
+				//System.out.println(	endbeforelist.next.value);
 			}
 		}
 		else{
@@ -144,9 +146,11 @@ public node partitionAround(int val,node head){
 				//System.out.println("before "+n.value);
 			}
 			else{
-				//System.out.println(startafterlist.value);
+				//System.out.println(endafterlist.value);
 				endafterlist.next=n;
 				endafterlist = n;
+				String bd = new String();
+				
 				//System.out.println("before "+n.value);
 			}
 		}
