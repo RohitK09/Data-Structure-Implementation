@@ -162,11 +162,11 @@ public void PreOrderTraversal(Node node){
 		bt.addNode(70, "d");
 		bt.addNode(30, "B");
 		bt.InTraversal(bt.root);
-		//bt.PreOrderTraversal(bt.root);
+		bt.PreOrderTraversal(bt.root);
 		System.out.println(bt.removeNode(40));
 		//System.out.println(bt.findNode(41));
 		//System.out.println(bt.removeNode(30));
-		bt.InTraversal(bt.root);
+		//bt.InTraversal(bt.root);
 	}
 
 }

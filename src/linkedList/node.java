@@ -39,6 +39,11 @@ public node removeNode(node head, int e){
 	
 	return head;
 }	
+
+private void setNext(node oldNode,node newNode)
+{
+	oldNode.next = newNode ;
+}
 public node findAndremoveDuplicate(node head){
 	node n = head;
 	HashSet<Integer> uniqueNumbers = new HashSet<Integer>();
@@ -163,6 +168,108 @@ public node partitionAround(int val,node head){
 	endbeforelist.next = startafterlist;
 	return startbeforelist;
 }
+
+public void  findMiddleOfList( node head){
+ node fastPtr = head;
+ node slowPtr = head;
+ if( head!=null){
+	 while(fastPtr!= null && fastPtr.next!=null){
+		 slowPtr = slowPtr.next;
+		 fastPtr= fastPtr.next.next;
+	 }
+	 System.out.println(slowPtr.value);
+ }
+}
+public void findNthNodefromLast(node head,int n){
+	node fastPtr = head;
+	node slowPtr = head;
+	int i =0 ;
+	while ( i < n)
+	{
+		fastPtr = fastPtr.next;
+		i++;
+	} 
+	while(fastPtr!=null){
+		slowPtr = slowPtr.next;
+		fastPtr = fastPtr.next;
+	}
+	System.out.println(slowPtr.value);
+}	
+/*
+ * adding two numbers
+ */
+private node addLinkLists(node n1,node n2 ,int carry)
+{	int value = carry;
+	node result = new node(carry);
+	
+	if(n1!=null){
+		value +=n1.value ;
+		
+	}
+	if(n2!= null){
+		value +=n2.value;
+	}
+	
+	result.value = value%10;
+	
+	if(n1!=null || n2!=null){
+		node more = addLinkLists(n1==null?null:n1.next,n2==null?null:n2.next,value>10?1:0);
+		result.setNext(result,more);
+	}
+	return result;
+}
+/*public addLinkListsDiffOrder(node firstNode,node secondNode, int carry ){
+	int firstlen = findlengthNode(firstNode);
+	int secondlen = findlengthNode(secondNode);
+	int value = carry;
+	node result = new node(value); 
+	if(firstNode!=null){
+		value +=firstNode.value;
+	}
+	
+	if(secondNode!=null){
+		value +=secondNode.value;
+	}
+	
+	carry = value%10;
+}*/
+public void padWithZeroes(node nodeToFill,int padLength){
+	
+}
+public int findlengthNode(node head){
+	int i = 0;
+	node tempNode = head;
+	while(tempNode!=null){
+		tempNode = tempNode.next;
+		i++;
+	}
+	return i;
+}
+
+public boolean checkPalindromeOrNot(node nodeToCheck){
+	Stack<Integer> stackOfNodes = new Stack<Integer>();
+	node slowPtr = nodeToCheck;
+	node fastPtr = nodeToCheck;
+	while(fastPtr !=null && fastPtr.next!=null){
+		stackOfNodes.push(slowPtr.value);
+		slowPtr = slowPtr.next;
+		fastPtr = fastPtr.next.next;
+		
+	}
+	//skips the middle element if number of nodes is odd
+	if(fastPtr!=null){
+		slowPtr = slowPtr.next;
+	}
+	while(slowPtr!=null){
+		if(slowPtr.value != stackOfNodes.pop().intValue() ){
+			
+			return false;
+		}
+		slowPtr = slowPtr.next;
+		}
+		return true;
+
+}
 public static void main(String[] args) {
 	node n = new node(0);
 	n.addtoEnd(5);
@@ -170,7 +277,7 @@ public static void main(String[] args) {
 	n.addtoEnd(6);
 	n.addtoEnd(9);
 	n.addtoEnd(7);
-	n.addtoEnd(8);
+	//n.addtoEnd(8);
 	//n.Display(n);
 	//node n1 = n.removeNode(n, 4);
 	//node n2 = n.findAndRemoveNodesWithoutTemp(n);
@@ -178,7 +285,20 @@ public static void main(String[] args) {
 	//node n3 = n.extraxtFromKtoN(n, 2);
 	//n.Display(n3);
 	//n.Display(n);
-	node n4 = n.partitionAround(6, n);
-	n.Display(n4);
+	//node n4 = n.partitionAround(6, n);
+	//n.Display(n4);
+	node n1 = new node(9);
+	n1.addtoEnd(4);
+	n1.addtoEnd(9);
+	node n2 = new node(7);
+	n2.addtoEnd(8);
+	n2.addtoEnd(0);
+	n.Display(n.addLinkLists(n1, n2, 0));
+	//n.findMiddleOfList(n);
+	//n.findNthNodefromLast(n,2);
+	System.out.println(n.findlengthNode(n1));
+	System.out.println(n.checkPalindromeOrNot(n1));
+	
+	
 }
 }
