@@ -6,24 +6,24 @@ import java.util.Stack;
 
 	
 
-public class node{
+public class Node{
 int value;
-node next = null ;
+Node next = null ;
 
-public node(int d) {
+public Node(int d) {
 	value = d;
 }
 public void addtoEnd(int d ){
-	node end = new node(d);
-	node n = this;
+	Node end = new Node(d);
+	Node n = this;
 	while(n.next!=null){
 		n = n.next;
 	}
 	n.next= end;
 }
-public node removeNode(node head, int e){
+public Node removeNode(Node head, int e){
 	
-	node n = head;
+	Node n = head;
 	if(head.value ==e){
 		return head.next;
 	}
@@ -40,14 +40,14 @@ public node removeNode(node head, int e){
 	return head;
 }	
 
-private void setNext(node oldNode,node newNode)
+private void setNext(Node oldNode,Node newNode)
 {
 	oldNode.next = newNode ;
 }
-public node findAndremoveDuplicate(node head){
-	node n = head;
+public Node findAndremoveDuplicate(Node head){
+	Node n = head;
 	HashSet<Integer> uniqueNumbers = new HashSet<Integer>();
-	node previous = null;
+	Node previous = null;
 	while(n!=null){
 		if(uniqueNumbers.contains(n.value)){
 		previous.next = n.next;
@@ -64,14 +64,14 @@ public node findAndremoveDuplicate(node head){
 	
 }
 
-public node findAndRemoveNodesWithoutTemp(node head)//without Temp buffer but O(n^2) {
+public Node findAndRemoveNodesWithoutTemp(Node head)//without Temp buffer but O(n^2) {
 { if (head.next==null)
 	 {
 		 return head;
 	 }
-	 node current = head ;
+	 Node current = head ;
 	 while (current!=null){
-	 node runner = current;
+	 Node runner = current;
 	 while(runner.next!=null){
 	 if(runner.next.value == current.value){
 		 runner.next = runner.next.next;
@@ -84,14 +84,14 @@ public node findAndRemoveNodesWithoutTemp(node head)//without Temp buffer but O(
 	 }
 	 return head;
 }
-public void Display( node head){
+public void Display( Node head){
 	//check if its of length null
 	
 	if (head.next==null){
 		System.out.println(head.value);
 		return;
 	}
-	node n = head ;
+	Node n = head ;
 	while(n.next!=null){
 	System.out.println(n.value);	
 	n = n.next;
@@ -101,9 +101,9 @@ public void Display( node head){
 	}
 }
 //Q:Implement an algorithm to find the kth to last element of a singly linked list
-public node extraxtFromKtoN(node head , int k){ //recursive o(1) space and o(n) time
-	node firstcounter = head;
-	node secondcounter = head;
+public Node extraxtFromKtoN(Node head , int k){ //recursive o(1) space and o(n) time
+	Node firstcounter = head;
+	Node secondcounter = head;
 	
 	for (int i = 0 ; i< k-1;i++){
 		if (secondcounter == null) return null; //error check
@@ -117,17 +117,17 @@ public node extraxtFromKtoN(node head , int k){ //recursive o(1) space and o(n) 
 	}
 	return firstcounter;
 }
-public node partitionAround(int val,node head){
-	node startbeforelist = null ;
-	node startafterlist = null;
-	node endbeforelist = null;
-	node endafterlist = null;
-	node n = head ;
+public Node partitionAround(int val,Node head){
+	Node startbeforelist = null ;
+	Node startafterlist = null;
+	Node endbeforelist = null;
+	Node endafterlist = null;
+	Node n = head ;
 	if(head == null){
 		return head;
 	}
 	while(n!=null){
-		node next = n.next;
+		Node next = n.next;
 		n.next = null;
 		if (n.value<val){
 			if(startbeforelist == null)
@@ -169,9 +169,9 @@ public node partitionAround(int val,node head){
 	return startbeforelist;
 }
 
-public void  findMiddleOfList( node head){
- node fastPtr = head;
- node slowPtr = head;
+public void  findMiddleOfList( Node head){
+ Node fastPtr = head;
+ Node slowPtr = head;
  if( head!=null){
 	 while(fastPtr!= null && fastPtr.next!=null){
 		 slowPtr = slowPtr.next;
@@ -180,9 +180,9 @@ public void  findMiddleOfList( node head){
 	 System.out.println(slowPtr.value);
  }
 }
-public void findNthNodefromLast(node head,int n){
-	node fastPtr = head;
-	node slowPtr = head;
+public void findNthNodefromLast(Node head,int n){
+	Node fastPtr = head;
+	Node slowPtr = head;
 	int i =0 ;
 	while ( i < n)
 	{
@@ -198,9 +198,9 @@ public void findNthNodefromLast(node head,int n){
 /*
  * adding two numbers
  */
-private node addLinkLists(node n1,node n2 ,int carry)
+private Node addLinkLists(Node n1,Node n2 ,int carry)
 {	int value = carry;
-	node result = new node(carry);
+	Node result = new Node(carry);
 	
 	if(n1!=null){
 		value +=n1.value ;
@@ -213,7 +213,7 @@ private node addLinkLists(node n1,node n2 ,int carry)
 	result.value = value%10;
 	
 	if(n1!=null || n2!=null){
-		node more = addLinkLists(n1==null?null:n1.next,n2==null?null:n2.next,value>10?1:0);
+		Node more = addLinkLists(n1==null?null:n1.next,n2==null?null:n2.next,value>10?1:0);
 		result.setNext(result,more);
 	}
 	return result;
@@ -233,12 +233,12 @@ private node addLinkLists(node n1,node n2 ,int carry)
 	
 	carry = value%10;
 }*/
-public void padWithZeroes(node nodeToFill,int padLength){
+public void padWithZeroes(Node nodeToFill,int padLength){
 	
 }
-public int findlengthNode(node head){
+public int findlengthNode(Node head){
 	int i = 0;
-	node tempNode = head;
+	Node tempNode = head;
 	while(tempNode!=null){
 		tempNode = tempNode.next;
 		i++;
@@ -246,10 +246,10 @@ public int findlengthNode(node head){
 	return i;
 }
 
-public boolean checkPalindromeOrNot(node nodeToCheck){
+public boolean checkPalindromeOrNot(Node nodeToCheck){
 	Stack<Integer> stackOfNodes = new Stack<Integer>();
-	node slowPtr = nodeToCheck;
-	node fastPtr = nodeToCheck;
+	Node slowPtr = nodeToCheck;
+	Node fastPtr = nodeToCheck;
 	while(fastPtr !=null && fastPtr.next!=null){
 		stackOfNodes.push(slowPtr.value);
 		slowPtr = slowPtr.next;
@@ -271,7 +271,7 @@ public boolean checkPalindromeOrNot(node nodeToCheck){
 
 }
 public static void main(String[] args) {
-	node n = new node(0);
+	Node n = new Node(0);
 	n.addtoEnd(5);
 	n.addtoEnd(4);
 	n.addtoEnd(6);
@@ -287,10 +287,10 @@ public static void main(String[] args) {
 	//n.Display(n);
 	//node n4 = n.partitionAround(6, n);
 	//n.Display(n4);
-	node n1 = new node(9);
+	Node n1 = new Node(9);
 	n1.addtoEnd(4);
 	n1.addtoEnd(9);
-	node n2 = new node(7);
+	Node n2 = new Node(7);
 	n2.addtoEnd(8);
 	n2.addtoEnd(0);
 	n.Display(n.addLinkLists(n1, n2, 0));
