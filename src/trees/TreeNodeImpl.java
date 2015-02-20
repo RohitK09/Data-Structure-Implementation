@@ -1,5 +1,13 @@
 package trees;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.swing.tree.TreeNode;
+
+import linkedList.LinkListAddition;
+
 public class TreeNodeImpl {
 	public TreeNodeImpl left;
 	public TreeNodeImpl right;
@@ -88,15 +96,94 @@ public class TreeNodeImpl {
 			return true;
 		}
 	}
+	public TreeNodeImpl MinBSTfromArray(int[] arr, int start, int end)
+	{
+	if(end<start)
+	{
+	  return null;
+	}
+	 int mid = (start+end)/2;
+	 TreeNodeImpl node = new TreeNodeImpl();
+	 node.Value=arr[mid];
+	 node.left = MinBSTfromArray(arr,start,mid-1);
+	 node.right = MinBSTfromArray(arr,mid+1,end);
+	 return node;
+	}
 
+public TreeNodeImpl MinBSTfromArray(int[] arr)
+{
+    if(arr!=null)
+	{
+		return MinBSTfromArray(arr,0,arr.length-1);
+	}
+  else 
+	{
+	 return null;
+	}	
+}
+void createLinkListFromBST(ArrayList<LinkedList<TreeNodeImpl>> lists,TreeNodeImpl root, int level)
+{		LinkedList<TreeNodeImpl> list = null;
+	
+	if(root==null)
+	{
+		return ; 
+	}
+	if(lists.size() == level)
+	{
+		list = new LinkedList<TreeNodeImpl>();
+		lists.add(list);   	
+	}
+	else
+	{
+		 list = lists.get(level);    	  	
+	}
+	list.add(root);
+	createLinkListFromBST(lists,root.left,level+1);
+	createLinkListFromBST(lists,root.right,level+1);
+}
+public ArrayList<LinkedList<TreeNodeImpl>> createLinkListFromBST(TreeNodeImpl root)
+{	ArrayList<LinkedList<TreeNodeImpl>> Lists = new ArrayList<LinkedList<TreeNodeImpl>>();
+	createLinkListFromBST(Lists,root,0);
+	return Lists;
+}
+public  boolean isLeaf( TreeNodeImpl node)
+{
+	if(node==null){
+		return false;
+	}
+	else if(node.left==null && node.right==null)
+	{
+		return true;
+	}
+	return false;
+}
+
+public  int leftLeafSum(TreeNodeImpl root)
+{int res = 0;
+	if(root!=null){
+	
+	
+	if(isLeaf(root.left))
+	res+=root.left.Value;
+	else
+		res+=leftLeafSum(root.left);
+	
+	res+=leftLeafSum(root.right);
+
+	}
+	return res;
+}	
 	public static void main(String[] args) {
 		TreeNodeImpl node = new TreeNodeImpl();
 		node.Value = 6;
-		node.left = node.newTreeNode(20);
+		node.left = node.newTreeNode(8);
+		node.left.right = node.newTreeNode(31);
 		node.left.left = node.newTreeNode(30);
 		node.right = node.newTreeNode(30);
 		node.right.right = node.newTreeNode(32);
-		node.left.left.left = node.newTreeNode(56);
+		node.right.left=node.newTreeNode(50);
+		//node.left.left.left = node.newTreeNode(56);
+		//node.left.left.left.left = node.newTreeNode(58);
 		/*
 		 * node.right.left.left=node.newTreeNode(32);
 		 * node.right.left.left.left=node.newTreeNode(32);
@@ -106,7 +193,11 @@ public class TreeNodeImpl {
 		 * //System.out.println(Size); //int height = node.recHeight(node);
 		 * //System.out.println(height);
 		 */
-		System.out.println(node.balancedOrNot2(node));
+	//	System.out.println(node.balancedOrNot2(node));
+	//	System.out.println(node.createLinkListFromBST(node));
+		int[] arrOfInt = {1,2,3,4,5};
+		System.out.println(node.leftLeafSum(node));
+	//	TreeNodeImpl BST = sortArrayToBST(arrOfInt);
 	}
 
 }

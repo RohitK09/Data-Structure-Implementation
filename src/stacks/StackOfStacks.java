@@ -1,6 +1,7 @@
 package stacks;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class StackOfStacks {
 	// array list of stacks
@@ -84,6 +85,7 @@ public class StackOfStacks {
 			// cast to long from double
 			stacks.push((long) (Math.random() * 100));
 		}
+		
 
 		/*
 		 * for (int i = 0; i < 20; i++) { System.out.println(stacks.pop()); }
